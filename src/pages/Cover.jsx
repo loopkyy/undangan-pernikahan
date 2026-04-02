@@ -29,7 +29,7 @@ const Cover = () => {
           </div>
         </div>
         
-        {/* Nama mempelai - 2 baris dengan gaya elegan */}
+        {/* Nama mempelai*/}
         <div className="mb-6">
           <h1 className="text-2xl md:text-3xl text-[#4a3728] font-light leading-tight tracking-wide">
             {weddingData.couple.pria.nama}
