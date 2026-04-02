@@ -136,7 +136,7 @@ const LoveStory = () => {
                       <Heart size={12} className="text-[#c9a87c] fill-[#c9a87c]" />
                     </div>
 
-                    {/* Cerita dengan fitur expand */}
+                    {/* Cerita*/}
                     <div className="text-[#8b7a6a] text-sm md:text-base leading-relaxed max-w-lg mx-auto px-2">
                       <p>
                         {shouldTruncate ? truncateText(currentStory.cerita, 150) : currentStory.cerita}
