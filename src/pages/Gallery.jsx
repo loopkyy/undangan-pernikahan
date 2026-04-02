@@ -93,7 +93,7 @@ const Gallery = () => {
                 <X size={24} />
               </button>
               
-              {/* PREV BUTTON (optional) */}
+              {/* PREV BUTTON */}
               <button 
                 className="absolute left-4 md:left-8 text-white/70 hover:text-white text-4xl font-light"
                 onClick={(e) => {
