@@ -109,7 +109,7 @@ const GiftPage = () => {
             ))}
           </div>
 
-          {/* QRIS - Bisa diklik dan diunduh */}
+          {/* QRIS */}
           <motion.div
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -122,7 +122,7 @@ const GiftPage = () => {
                 QRIS
               </h3>
 
-              {/* QR Code dengan efek hover dan klik */}
+              {/* QR Code*/}
               <motion.div 
                 className="relative cursor-pointer group"
                 whileHover={{ scale: 1.05 }}
@@ -136,7 +136,7 @@ const GiftPage = () => {
                     className="w-full h-full object-contain rounded-2xl shadow-lg"
                   />
                   
-                  {/* Overlay efek saat hover */}
+                  {/* Overlay hover */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 rounded-2xl transition-all duration-300 flex items-center justify-center">
                     <ZoomIn className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300" size={32} />
                   </div>
@@ -175,7 +175,7 @@ const GiftPage = () => {
         </div>
       </motion.div>
 
-      {/* Modal untuk QR Code diperbesar */}
+      {/* Tombol Pembesar */}
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -221,7 +221,7 @@ const GiftPage = () => {
                   {weddingData.qris.keterangan}
                 </p>
 
-                {/* Tombol Download di modal */}
+                {/* Tombol Download Modal*/}
                 <div className="flex gap-3 justify-center mt-6">
                   <button
                     onClick={handleDownloadQR}
