@@ -27,7 +27,7 @@ const Couple = () => {
         {/* Couple*/}
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
 
-          {/* Pempelai Laki laki */}
+          {/* mempelai Laki laki */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -69,7 +69,7 @@ const Couple = () => {
           </motion.div>
 
 
-          {/* Pempelai Wanita */}
+          {/* mempelai Wanita */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
