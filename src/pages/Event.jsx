@@ -7,12 +7,10 @@ import CountdownSection from '../components/CountdownSection.jsx'
 
 const Event = () => {
   const { akad, resepsi } = weddingData.event
-
-  // Fungsi untuk parse tanggal dengan benar
   const parseWeddingDate = (tanggal, waktu) => {
     if (!tanggal || !waktu) return null
     
-    // Ambil jam mulai dari format "09:00 - 10:00"
+    // Ambil jam mulai"
     const startTime = waktu.split(' - ')[0]
     // Gabungkan tanggal dan jam
     const dateTimeString = `${tanggal}T${startTime}:00`
@@ -21,11 +19,9 @@ const Event = () => {
     // Cek apakah tanggal valid
     return isNaN(date.getTime()) ? null : date
   }
-
-  // Parse tanggal untuk countdown (pakai akad)
   const akadDate = parseWeddingDate(akad.tanggal, akad.waktu)
 
-  // Format tanggal untuk display (ubah YYYY-MM-DD ke format lebih rapi)
+  // Format tanggal
   const formatTanggal = (tanggal) => {
     if (!tanggal) return ''
     const parts = tanggal.split('-')
@@ -63,7 +59,7 @@ const Event = () => {
           />
         )}
 
-        {/* AKAD dan RESEPSI dalam 1 baris/grid */}
+        {/* AKAD dan RESEPSI */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* AKAD */}
           <motion.div
