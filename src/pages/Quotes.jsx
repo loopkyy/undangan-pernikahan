@@ -12,7 +12,7 @@ const Quotes = () => {
   const [startTyping, setStartTyping] = useState(false)
   const [finished, setFinished] = useState(false)
 
-  // Delay sebelum mulai mengetik
+  // mulai mengetik
   useEffect(() => {
     const delay = setTimeout(() => {
       setStartTyping(true)
@@ -29,7 +29,7 @@ const Quotes = () => {
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + fullText[index])
         setIndex(prev => prev + 1)
-      }, 35) // kecepatan ketik
+      }, 35)
 
       return () => clearTimeout(timeout)
     } else {
