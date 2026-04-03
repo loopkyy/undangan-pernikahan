@@ -18,7 +18,7 @@ const FallingFlowers = () => {
     setFlowers(newFlowers);
   }, []);
 
-  // Bunga bentuk 1 (kelopak 5)
+  // Bunga bentuk 1
   const FlowerType1 = ({ size }) => (
     <div style={{ width: size, height: size, position: 'relative' }}>
       {[0, 1, 2, 3, 4].map((i) => {
