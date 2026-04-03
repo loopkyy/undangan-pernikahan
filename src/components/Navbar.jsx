@@ -125,7 +125,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Navbar Mobile - Bottom Horizontal Scroll */}
+      {/* Navbar Mobile*/}
       <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
         <div className="bg-white/95 backdrop-blur-sm border-t border-[#c9a87c]/20 shadow-lg">
           {/* Tombol scroll kiri */}
@@ -178,17 +178,17 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* SPACER UNTUK NAVBAR - Perbaikan ada di sini */}
+      {/* Spacer Navbar */}
       {/* Spacer untuk top navbar (desktop) */}
       <div className="hidden md:block h-20"></div>
       
-      {/* Spacer untuk top navbar (mobile) - jika ada navbar top di mobile */}
+      {/* Spacer untuk top navbar (mobile) */}
       <div className="md:hidden h-0"></div>
       
-      {/* Spacer untuk bottom navbar (mobile) - INI PENTING! */}
+      {/* Spacer untuk bottom navbar (mobile)*/}
       <div className="md:hidden h-20"></div>
       
-      {/* Sembunyikan scrollbar di Chrome/Safari/Edge */}
+      {/* Sembunyikan scrollbar*/}
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
