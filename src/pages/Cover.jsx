@@ -21,6 +21,8 @@ const Cover = () => {
             <img 
               src={weddingData.couple.fotoBersama}
               alt={`${weddingData.couple.pria.nama} & ${weddingData.couple.wanita.nama}`}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full rounded-full object-cover"
               onError={(e) => {
                 e.target.src = `https://ui-avatars.com/api/?name=${weddingData.couple.pria.nama}+${weddingData.couple.wanita.nama}&background=c9a87c&color=fff&size=200`

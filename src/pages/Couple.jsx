@@ -39,6 +39,8 @@ const Couple = () => {
                 <img 
                   src={weddingData.couple.pria.foto}
                   alt={weddingData.couple.pria.nama}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full rounded-full object-cover hover:scale-105 transition duration-500"
                   onError={(e) => {
                     e.target.src = `https://ui-avatars.com/api/?name=${weddingData.couple.pria.nama}&background=c9a87c&color=fff&size=300`

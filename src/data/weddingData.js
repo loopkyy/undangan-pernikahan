@@ -1,15 +1,14 @@
-import gaganImg from '../assets/images/gagan.jpeg'
-import vicaImg from '../assets/images/vica.jpeg'
-import coupleImg from '../assets/images/couple.jpeg'
+import gaganImg from '../assets/images/gagan.webp'
+import vicaImg from '../assets/images/vica.webp'
+import coupleImg from '../assets/images/couple.webp'
 
-import galery1 from '../assets/images/galery1.jpeg'
-import galery2 from '../assets/images/galery2.jpeg'
-import galery3 from '../assets/images/galery3.jpeg'
-import galery4 from '../assets/images/galery4.jpeg'
-import galery5 from '../assets/images/galery5.jpeg'
-import galery6 from '../assets/images/galery6.jpeg'
+import galery1 from '../assets/images/galery1.webp'
+import galery2 from '../assets/images/galery2.webp'
+import galery3 from '../assets/images/galery3.webp'
+import galery4 from '../assets/images/galery4.webp'
+import galery5 from '../assets/images/galery5.webp'
 
-import danaImg from '../assets/images/dana.jpeg'
+import danaImg from '../assets/images/dana.webp'
 
 import musicFile from '../assets/music/Bandaneira Sampai Jadi Debu (unofficial music video).mp3'
 
@@ -56,22 +55,30 @@ export const weddingData = {
     }
   },
 
-  loveStory: [
-    {
-      tahun: "2020",
-      judul: "Pertemuan Pertama",
-      cerita:
-        "Berawal dari sebuah acara keluarga, takdir mempertemukan kami di sebuah kedai kopi kecil."
-    }
-  ],
+loveStory: [
+  {
+    tahun: "2020",
+    judul: "Pertemuan Pertama",
+    cerita: "Berawal dari sebuah acara keluarga, takdir mempertemukan kami di sebuah kedai kopi kecil. Awalnya hanya sekadar tegur sapa, tapi tanpa disadari percakapan pertama itu menjadi awal dari segalanya. Kami bertukar nomor telepon dan mulai saling mengenal lebih jauh."
+  },
+  {
+    tahun: "2022",
+    judul: "Mulai Serius",
+    cerita: "Setelah dua tahun saling mengenal, kami memutuskan untuk menjalin hubungan yang lebih serius. Banyak suka dan duka kami lalui bersama. Mulai dari tawa bahagia hingga air mata, semuanya justru membuat kami semakin yakin bahwa kami ditakdirkan untuk bersama."
+  },
+  {
+    tahun: "2025",
+    judul: "Lamaran",
+    cerita: "Dengan restu dan doa dari kedua keluarga, aku memberanikan diri untuk melamar Vica. Momen yang tak akan pernah kami lupakan, saat lutut ini bersimpuh dan meminta izin untuk menjaga putri terbaik mereka seumur hidup. Alhamdulillah, jawaban 'iya' terdengar begitu indah."
+  }
+],
 
   gallery: [
     { url: galery1, caption: "Pre-wedding 1" },
     { url: galery2, caption: "Pre-wedding 2" },
     { url: galery3, caption: "Pre-wedding 3" },
     { url: galery4, caption: "Pre-wedding 4" },
-    { url: galery5, caption: "Pre-wedding 5" },
-    { url: galery6, caption: "Pre-wedding 6" }
+    { url: galery5, caption: "Pre-wedding 5" }
   ],
 
   quotes: [
@@ -82,11 +89,10 @@ export const weddingData = {
     }
   ],
 
-  map: {
-    embedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18...",
-    link: "https://maps.app.goo.gl/6yTxrcTbNWbT6k2Q8"
-  },
+map: {
+    embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1793.1612908351876!2d108.4286074790942!3d-6.991384957530554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f1516b4719b09%3A0x5a06dd8bd0950119!2sPKBM%20ALIMMUTAMAD!5e1!3m2!1sid!2sid!4v1778311748471!5m2!1sid!2sid",
+    link: "https://maps.app.goo.gl/PvFfEmeLPtznJmh97"
+},
 
   qris: {
     image: danaImg,
