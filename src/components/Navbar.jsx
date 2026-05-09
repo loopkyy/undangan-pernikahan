@@ -6,6 +6,8 @@ import {
   ChevronLeft, ChevronRight 
 } from 'lucide-react'
 
+import logoImg from '../assets/images/logo.png'
+
 const Navbar = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -18,14 +20,18 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
+
     window.addEventListener('scroll', handleScroll)
+
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const checkScroll = () => {
     const container = scrollContainerRef.current
+
     if (container) {
       setShowLeftArrow(container.scrollLeft > 0)
+
       setShowRightArrow(
         container.scrollLeft < container.scrollWidth - container.clientWidth - 10
       )
@@ -34,14 +40,18 @@ const Navbar = () => {
 
   useEffect(() => {
     checkScroll()
+
     window.addEventListener('resize', checkScroll)
+
     return () => window.removeEventListener('resize', checkScroll)
   }, [])
 
   const scroll = (direction) => {
     const container = scrollContainerRef.current
+
     if (container) {
       const scrollAmount = 200
+
       container.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -71,12 +81,13 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Navbar Desktop - Top */}
+      {/* Navbar Desktop */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden md:block ${
         isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
       }`}>
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-20">
+
             {/* LOGO */}
             <div className="relative">
               <div className={`w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 ${
@@ -84,20 +95,25 @@ const Navbar = () => {
                   ? 'border-[#c9a87c] shadow-md' 
                   : 'border-white/80'
               }`}>
+
                 <img 
-                  src="src/assets/images/logo.png"
+                  src={logoImg}
                   alt="Logo"
                   className="w-full h-full object-cover"
                 />
+
               </div>
+
               <div className={`absolute inset-0 rounded-full blur-sm transition-opacity duration-300 ${
                 isScrolled ? 'opacity-30 bg-[#c9a87c]' : 'opacity-0'
               }`}></div>
             </div>
 
+            {/* MENU */}
             <div className="flex items-center space-x-1">
               {menuItems.map((item) => {
                 const Icon = item.icon
+
                 return (
                   <button
                     key={item.path}
@@ -110,8 +126,11 @@ const Navbar = () => {
                     `}
                   >
                     <Icon size={18} strokeWidth={1.5} />
-                    <span className="font-light">{item.label}</span>
-                    
+
+                    <span className="font-light">
+                      {item.label}
+                    </span>
+
                     {isActive(item.path) && (
                       <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-[#c9a87c] rounded-full"></span>
                     )}
@@ -125,10 +144,11 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Navbar Mobile*/}
+      {/* Navbar Mobile */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
         <div className="bg-white/95 backdrop-blur-sm border-t border-[#c9a87c]/20 shadow-lg">
-          {/* Tombol scroll kiri */}
+
+          {/* Arrow Left */}
           {showLeftArrow && (
             <button
               onClick={() => scroll('left')}
@@ -138,7 +158,7 @@ const Navbar = () => {
             </button>
           )}
 
-          {/* Tombol scroll kanan */}
+          {/* Arrow Right */}
           {showRightArrow && (
             <button
               onClick={() => scroll('right')}
@@ -148,7 +168,7 @@ const Navbar = () => {
             </button>
           )}
 
-          {/* Container scroll */}
+          {/* Scroll Container */}
           <div
             ref={scrollContainerRef}
             onScroll={checkScroll}
@@ -158,6 +178,7 @@ const Navbar = () => {
             <div className="flex space-x-2 min-w-max">
               {menuItems.map((item) => {
                 const Icon = item.icon
+
                 return (
                   <button
                     key={item.path}
@@ -169,7 +190,10 @@ const Navbar = () => {
                     }`}
                   >
                     <Icon size={20} strokeWidth={1.5} />
-                    <span className="text-[10px] mt-1 font-light whitespace-nowrap">{item.label}</span>
+
+                    <span className="text-[10px] mt-1 font-light whitespace-nowrap">
+                      {item.label}
+                    </span>
                   </button>
                 )
               })}
@@ -178,17 +202,12 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Spacer Navbar */}
-      {/* Spacer untuk top navbar (desktop) */}
+      {/* Spacer */}
       <div className="hidden md:block h-20"></div>
-      
-      {/* Spacer untuk top navbar (mobile) */}
       <div className="md:hidden h-0"></div>
-      
-      {/* Spacer untuk bottom navbar (mobile)*/}
       <div className="md:hidden h-20"></div>
-      
-      {/* Sembunyikan scrollbar*/}
+
+      {/* Hide Scrollbar */}
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
