@@ -78,18 +78,22 @@ function App() {
         </button>
       </div>
       
-      {/* TOMBOL MUSIK */}
-      <button
-        onClick={togglePlay}
-        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${
-          isPlaying 
-            ? 'bg-[#c9a87c] text-white' 
-            : 'bg-white text-[#c9a87c] border border-[#c9a87c]'
-        }`}
-      >
-        {isPlaying ? '🔊' : '🔈'}
-      </button>
-      
+     {/* TOMBOL MUSIK - Responsive */}
+<button
+  onClick={togglePlay}
+  className={`fixed z-50 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110
+    ${isPlaying 
+      ? 'bg-[#c9a87c] text-white' 
+      : 'bg-white text-[#c9a87c] border border-[#c9a87c]'
+    }
+    /* Mobile: di atas navbar bottom */
+    bottom-24 right-4
+    /* Desktop: tetap di pojok */
+    md:bottom-6 md:right-6
+  `}
+>
+  {isPlaying ? '🔊' : '🔈'}
+</button>
       {/* ROUTES - KONTEN UTAMA */}
       <div className="relative z-20 bg-transparent">
         <AnimatePresence mode="wait">
