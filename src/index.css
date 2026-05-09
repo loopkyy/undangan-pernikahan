@@ -1,3 +1,4 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,4 +22,86 @@
 
 .animate-fadeIn {
   animation: fadeIn 1s ease-out forwards;
+}
+
+/* ========== FIX UNTUK NAVBAR ========== */
+
+/* Reset body */
+body {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Container utama */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Setiap halaman akan memiliki padding top dan bottom */
+.page-container {
+  flex: 1;
+  padding-top: 80px;    /* Sesuai tinggi navbar desktop */
+  padding-bottom: 100px; /* Spacer untuk bottom navbar */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .page-container {
+    padding-top: 70px;    /* Lebih kecil untuk mobile */
+    padding-bottom: 120px; /* Lebih besar karena ada bottom navbar */
+  }
+}
+
+/* Untuk iPhone safe area (notch & home indicator) */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .page-container {
+    padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  }
+  
+  @media (max-width: 768px) {
+    .page-container {
+      padding-bottom: calc(120px + env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* Untuk Android dengan gesture bar */
+@supports (padding-bottom: constant(safe-area-inset-bottom)) {
+  .page-container {
+    padding-bottom: calc(120px + constant(safe-area-inset-bottom));
+  }
+}
+
+/* Smooth scroll untuk anchor */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Untuk desktop */
+  scroll-padding-bottom: 70px; /* Untuk mobile bottom navbar */
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 70px;
+    scroll-padding-bottom: 70px;
+  }
+}
+
+/* Fix untuk elemen fixed agar tidak blur */
+.fixed-element {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optional: Tambahkan transisi untuk navbar */
+.navbar-transition {
+  transition: all 0.3s ease;
 }

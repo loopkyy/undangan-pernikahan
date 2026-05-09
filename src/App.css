@@ -1,42 +1,46 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+
+/* Custom styles untuk love story */
+.perspective-1000 {
+  perspective: 1000px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Animasi lembaran buku */
+@keyframes pageFlip {
+  0% {
+    transform: rotateY(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: rotateY(-180deg);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Hover effect untuk buku */
+.book-page {
+  transition: transform 0.3s ease;
+}
+
+.book-page:hover {
+  transform: scale(1.02);
+}
+
+/* Extra small devices (mobile kecil) */
+@media (max-width: 480px) {
+  .xs\:inline {
+    display: inline;
+  }
+  .xs\:hidden {
+    display: none;
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Untuk mobile dengan layar sangat kecil */
+@media (max-width: 360px) {
+  .perspective-1000 {
+    perspective: none;
+  }
+  
+  .bg-gradient-to-br {
+    background: rgba(255, 255, 255, 0.9);
+  }
 }

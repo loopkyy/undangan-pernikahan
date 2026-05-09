@@ -1,70 +1,114 @@
-import React, { useState, useEffect } from 'react';
-import { weddingData } from './data/weddingData';
+import React, { useRef, useState, useEffect } from 'react'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import { Gift } from 'lucide-react'
+import Navbar from './components/Navbar'
+import FallingFlowers from './components/FallingFlowers'
+import { weddingData } from './data/weddingData'
 
-// Layout
-import MusicButton from './components/layout/MusicButton';
-
-// Sections
-import Cover from './components/sections/Cover';
-import Quotes from './components/sections/Quotes';
-import Couple from './components/sections/Couple';
-import Event from './components/sections/Event';
-import LoveStory from './components/sections/LoveStory';
-import Gallery from './components/sections/Gallery';
-import Wishes from './components/sections/Wishes';
-import Map from './components/sections/Map';
-import ThankYou from './components/sections/ThankYou';
+// Import pages
+import Cover from './pages/Cover'
+import Quotes from './pages/Quotes'
+import Couple from './pages/Couple'
+import Event from './pages/Event'
+import LoveStory from './pages/LoveStory'
+import Gallery from './pages/Gallery'
+import Wishes from './pages/Wishes'
+import Map from './pages/Map'
+import ThankYou from './pages/ThankYou'
+import GiftPage from './pages/GiftPage'
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation()
+  const navigate = useNavigate()
+  const audioRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [hasInteracted, setHasInteracted] = useState(false)
 
-  // Intersection Observer untuk animasi fade in
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-            entry.target.classList.remove('opacity-0', 'translate-y-10');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
+    if (audioRef.current && !hasInteracted) {
+      audioRef.current.play()
+        .then(() => {
+          setIsPlaying(true)
+          setHasInteracted(true)
+        })
+        .catch(e => console.log("Autoplay blocked"))
+    }
+  }, [])
 
-    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [isOpen]);
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+        setIsPlaying(false)
+      } else {
+        audioRef.current.play()
+          .then(() => {
+            setIsPlaying(true)
+            setHasInteracted(true)
+          })
+          .catch(e => console.log("Play error:", e))
+      }
+    }
+  }
 
   return (
-    <div className="min-h-screen bg-[#faf7f2] font-serif">
-      <MusicButton src={weddingData.music} />
+    <div className="min-h-screen bg-[#faf7f2] font-serif relative">
+      {/* BUNGA GUGUR - DI ATAS BACKGROUND */}
+      <FallingFlowers />
       
-      <Cover onOpen={() => setIsOpen(true)} />
+      {/* AUDIO */}
+      <audio ref={audioRef} src={weddingData.music} loop preload="auto" />
       
-      {isOpen && (
-        <>
-          <Quotes quotes={weddingData.quotes} />
-          <Couple 
-            pria={weddingData.couple.pria} 
-            wanita={weddingData.couple.wanita} 
-          />
-          <Event 
-            akad={weddingData.event.akad} 
-            resepsi={weddingData.event.resepsi} 
-          />
-          <LoveStory stories={weddingData.loveStory} />
-          <Gallery photos={weddingData.gallery} />
-          <Map 
-            embedUrl={weddingData.map.embedUrl} 
-            link={weddingData.map.link} 
-          />
-          <Wishes />
-          <ThankYou />
-        </>
-      )}
+      {/* NAVBAR - Z-INDEX TINGGI */}
+      <div className="relative z-30">
+        <Navbar />
+      </div>
+      
+      {/* TOMBOL HADIAH */}
+      <div className="fixed bottom-24 left-6 z-50">
+        <button
+          onClick={() => navigate('/gift')}
+          className="bg-[#c9a87c] text-white p-3 rounded-full shadow-lg hover:bg-[#b89364] transition flex items-center space-x-2 group"
+        >
+          <Gift size={20} />
+          <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 whitespace-nowrap">
+            Kirim Hadiah
+          </span>
+        </button>
+      </div>
+      
+      {/* TOMBOL MUSIK */}
+      <button
+        onClick={togglePlay}
+        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+          isPlaying 
+            ? 'bg-[#c9a87c] text-white' 
+            : 'bg-white text-[#c9a87c] border border-[#c9a87c]'
+        }`}
+      >
+        {isPlaying ? '🔊' : '🔈'}
+      </button>
+      
+      {/* ROUTES - KONTEN UTAMA */}
+      <div className="relative z-20 bg-transparent">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Cover />} />
+            <Route path="/quotes" element={<Quotes />} />
+            <Route path="/couple" element={<Couple />} />
+            <Route path="/event" element={<Event />} />
+            <Route path="/lovestory" element={<LoveStory />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/wishes" element={<Wishes />} />
+            <Route path="/map" element={<Map />} />
+            <Route path="/thankyou" element={<ThankYou />} />
+            <Route path="/gift" element={<GiftPage />} />
+          </Routes>
+        </AnimatePresence>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
