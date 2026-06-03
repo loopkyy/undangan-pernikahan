@@ -10,7 +10,7 @@ import galery5 from '../assets/images/galery5.webp'
 import galery6 from '../assets/images/galery6.webp'
 
 
-import musicFile from '../assets/music/Bandaneira Sampai Jadi Debu (unofficial music video).mp3'
+import musicFile from '../assets/music/Ed Sheeran - Perfect (Lyrics).mp3'
 
 export const weddingData = {
   couple: {
