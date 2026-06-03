@@ -5,14 +5,24 @@ import { weddingData } from '../data/weddingData'
 const Cover = () => {
   const navigate = useNavigate()
 
+  const handleOpenInvitation = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log("Tombol diklik!") // Debug: cek di console browser
+    navigate('/quotes')
+  }
+
   return (
-    <div className="page-container min-h-screen flex items-center justify-center relative">
+    <div 
+      className="page-container min-h-screen flex items-center justify-center relative cursor-pointer"
+      style={{ touchAction: 'manipulation' }} // Mencegah zoom double-tap
+    >
       
       {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-40 h-40 border-l-2 border-t-2 border-[#c9a87c]/20"></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 border-r-2 border-b-2 border-[#c9a87c]/20"></div>
+      <div className="absolute top-20 left-10 w-40 h-40 border-l-2 border-t-2 border-[#c9a87c]/20 pointer-events-none"></div>
+      <div className="absolute bottom-20 right-10 w-40 h-40 border-r-2 border-b-2 border-[#c9a87c]/20 pointer-events-none"></div>
       
-      <div className="text-center px-4 max-w-md">
+      <div className="text-center px-4 max-w-md w-full">
         <p className="text-[#c9a87c] tracking-[0.3em] text-xs mb-6">THE WEDDING OF</p>
         
         {/* Foto Mempelai */}
@@ -53,12 +63,25 @@ const Cover = () => {
         <p className="text-[#6b5a4a] mb-8">Kepada Yth. Bapak/Ibu/Saudara/i</p>
         <p className="text-[#8b7a6a] text-lg mb-12">Keluarga Besar & Sahabat</p>
         
-        <button 
-          onClick={() => navigate('/quotes')}
-          className="border-2 border-[#c9a87c] text-[#c9a87c] hover:bg-[#c9a87c] hover:text-white px-10 py-3 tracking-[0.2em] text-sm transition-all duration-500"
-        >
-          BUKA UNDANGAN
-        </button>
+        {/* TOMBOL - DIPERBESAR AREA KLIKNYA */}
+        <div className="flex justify-center">
+          <button 
+            onClick={handleOpenInvitation}
+            onTouchStart={(e) => {
+              // Untuk HP, touchStart lebih responsif
+              e.preventDefault()
+              handleOpenInvitation(e)
+            }}
+            className="border-2 border-[#c9a87c] text-[#c9a87c] hover:bg-[#c9a87c] hover:text-white px-10 py-4 tracking-[0.2em] text-sm transition-all duration-500 min-w-[200px] active:scale-95 active:bg-[#c9a87c] active:text-white"
+            style={{ 
+              touchAction: 'manipulation',
+              cursor: 'pointer',
+              WebkitTapHighlightColor: 'transparent'
+            }}
+          >
+            BUKA UNDANGAN
+          </button>
+        </div>
       </div>
     </div>
   )
