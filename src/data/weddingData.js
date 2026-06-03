@@ -1,14 +1,14 @@
 import gaganImg from '../assets/images/gagan.webp'
 import vicaImg from '../assets/images/vica.webp'
-import coupleImg from '../assets/images/couple.webp'
+import coupleImg from '../assets/images/depan.webp'
 
 import galery1 from '../assets/images/galery1.webp'
 import galery2 from '../assets/images/galery2.webp'
 import galery3 from '../assets/images/galery3.webp'
 import galery4 from '../assets/images/galery4.webp'
 import galery5 from '../assets/images/galery5.webp'
+import galery6 from '../assets/images/galery6.webp'
 
-import danaImg from '../assets/images/dana.webp'
 
 import musicFile from '../assets/music/Bandaneira Sampai Jadi Debu (unofficial music video).mp3'
 
@@ -55,30 +55,14 @@ export const weddingData = {
     }
   },
 
-loveStory: [
-  {
-    tahun: "2020",
-    judul: "Pertemuan Pertama",
-    cerita: "Berawal dari sebuah acara keluarga, takdir mempertemukan kami di sebuah kedai kopi kecil. Awalnya hanya sekadar tegur sapa, tapi tanpa disadari percakapan pertama itu menjadi awal dari segalanya. Kami bertukar nomor telepon dan mulai saling mengenal lebih jauh."
-  },
-  {
-    tahun: "2022",
-    judul: "Mulai Serius",
-    cerita: "Setelah dua tahun saling mengenal, kami memutuskan untuk menjalin hubungan yang lebih serius. Banyak suka dan duka kami lalui bersama. Mulai dari tawa bahagia hingga air mata, semuanya justru membuat kami semakin yakin bahwa kami ditakdirkan untuk bersama."
-  },
-  {
-    tahun: "2025",
-    judul: "Lamaran",
-    cerita: "Dengan restu dan doa dari kedua keluarga, aku memberanikan diri untuk melamar Vica. Momen yang tak akan pernah kami lupakan, saat lutut ini bersimpuh dan meminta izin untuk menjaga putri terbaik mereka seumur hidup. Alhamdulillah, jawaban 'iya' terdengar begitu indah."
-  }
-],
-
   gallery: [
     { url: galery1, caption: "Pre-wedding 1" },
     { url: galery2, caption: "Pre-wedding 2" },
     { url: galery3, caption: "Pre-wedding 3" },
     { url: galery4, caption: "Pre-wedding 4" },
-    { url: galery5, caption: "Pre-wedding 5" }
+    { url: galery5, caption: "Pre-wedding 5" },
+    { url: galery6, caption: "Pre-wedding 6" },
+
   ],
 
   quotes: [
@@ -94,11 +78,6 @@ map: {
     link: "https://maps.app.goo.gl/PvFfEmeLPtznJmh97"
 },
 
-  qris: {
-    image: danaImg,
-    nama: "Gagan Maulana R",
-    keterangan: "Scan untuk transfer"
-  },
 
   music: musicFile
 }
