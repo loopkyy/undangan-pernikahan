@@ -64,7 +64,6 @@ const Navbar = () => {
     { path: '/quotes', label: 'Ayat', icon: Book },
     { path: '/couple', label: 'Mempelai', icon: Users },
     { path: '/event', label: 'Acara', icon: Calendar },
-    { path: '/lovestory', label: 'Cerita', icon: Heart },
     { path: '/gallery', label: 'Galeri', icon: Camera },
     { path: '/wishes', label: 'Ucapan', icon: MessageCircle },
     { path: '/gift', label: 'Hadiah', icon: Gift },
