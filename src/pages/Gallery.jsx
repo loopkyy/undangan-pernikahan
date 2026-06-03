@@ -13,34 +13,32 @@ const Gallery = () => {
     caption: item.caption
   }))
 
+  // Fungsi buka modal
   const openModal = (photo, index) => {
     setSelectedPhoto(photo)
     setCurrentIndex(index)
-    // Lock scroll
-    document.body.style.overflow = 'hidden'
   }
 
+  // Fungsi tutup modal
   const closeModal = () => {
     setSelectedPhoto(null)
-    // Unlock scroll
-    document.body.style.overflow = 'unset'
   }
 
-  const prevPhoto = (e) => {
-    if (e) e.stopPropagation()
+  // Fungsi prev foto
+  const prevPhoto = () => {
     const newIndex = currentIndex > 0 ? currentIndex - 1 : photos.length - 1
     setCurrentIndex(newIndex)
     setSelectedPhoto(photos[newIndex])
   }
 
-  const nextPhoto = (e) => {
-    if (e) e.stopPropagation()
+  // Fungsi next foto
+  const nextPhoto = () => {
     const newIndex = currentIndex < photos.length - 1 ? currentIndex + 1 : 0
     setCurrentIndex(newIndex)
     setSelectedPhoto(photos[newIndex])
   }
 
-  // Keyboard navigation (Desktop)
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!selectedPhoto) return
@@ -57,6 +55,18 @@ const Gallery = () => {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [selectedPhoto, currentIndex])
+
+  // Prevent scroll saat modal terbuka
+  useEffect(() => {
+    if (selectedPhoto) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [selectedPhoto])
 
   return (
     <>
@@ -75,15 +85,19 @@ const Gallery = () => {
             <h2 className="text-3xl md:text-5xl text-[#4a3728] mb-4 font-light tracking-wide">Gallery</h2>
             <div className="w-16 h-px bg-[#c9a87c] mx-auto"></div>
             <p className="text-[#8b7a6a] text-sm md:text-base mt-4 max-w-2xl mx-auto">
-              Kebahagiaan yang tertuang dalam setiap bingkai
+           Kebahagiaan yang tertuang dalam setiap bingkai
             </p>
           </div>
 
-          {/* GALLERY GRID */}
+          {/* GALLERY GRID - BISA DI KLIK */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-6">
             {photos.map((photo, index) => (
-              <div
+              <motion.div
                 key={photo.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
                 className="relative group cursor-pointer active:scale-95 transition-all duration-150"
                 onClick={() => openModal(photo, index)}
               >
@@ -101,20 +115,24 @@ const Gallery = () => {
                     />
                   </div>
                   
+                  {/* OVERLAY GRADIENT - MUNCUL SAAT HOVER */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
+                  {/* CAPTION - MUNCUL SAAT HOVER */}
                   <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <p className="text-xs md:text-sm font-light">{photo.caption}</p>
                   </div>
 
+                  {/* IKON CAMERA - MUNCUL SAAT HOVER */}
                   <div className="absolute top-3 right-3 bg-white/90 p-1.5 md:p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <Camera size={14} className="text-[#4a3728] md:w-4 md:h-4" />
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
+          {/* FOOTER NOTE */}
           <div className="text-center mt-12">
             <p className="text-[#8b7a6a] text-sm">
               ✨ Klik foto untuk melihat lebih besar ✨
@@ -123,65 +141,69 @@ const Gallery = () => {
         </div>
       </motion.div>
 
-      {/* MODAL SEDERHANA - RINGAN UNTUK MOBILE */}
+      {/* MODAL LIGHTBOX - Bisa diklik, geser, dan tutup */}
       {selectedPhoto && (
         <div 
-          className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center"
+          className="fixed inset-0 bg-black/95 z-[9999] flex items-center justify-center"
           onClick={closeModal}
-          style={{ touchAction: 'manipulation' }}
         >
-          {/* Tombol Close - Diperbesar untuk mobile */}
+          {/* Tombol Close */}
           <button
             onClick={closeModal}
-            className="absolute top-4 right-4 text-white bg-black/50 rounded-full p-3 z-[10000] active:bg-black/70"
-            style={{ minWidth: '44px', minHeight: '44px' }}
+            className="absolute top-4 right-4 md:top-8 md:right-8 text-white/80 hover:text-white bg-black/50 hover:bg-black/70 rounded-full p-2 md:p-3 transition-all duration-300 z-[10000]"
           >
-            <X size={22} />
+            <X size={24} className="md:w-7 md:h-7" />
           </button>
 
-          {/* Tombol Prev - Diperbesar untuk mobile */}
+          {/* Tombol Prev */}
           <button
-            onClick={prevPhoto}
-            className="absolute left-2 text-white/70 bg-black/30 rounded-full p-3 z-[10000] active:bg-black/50"
-            style={{ minWidth: '44px', minHeight: '44px' }}
+            onClick={(e) => {
+              e.stopPropagation()
+              prevPhoto()
+            }}
+            className="absolute left-2 md:left-8 text-white/70 hover:text-white bg-black/30 hover:bg-black/50 rounded-full p-2 md:p-3 transition-all duration-300 z-[10000]"
           >
-            <ChevronLeft size={28} />
+            <ChevronLeft size={32} className="md:w-10 md:h-10" />
           </button>
 
-          {/* Tombol Next - Diperbesar untuk mobile */}
+          {/* Tombol Next */}
           <button
-            onClick={nextPhoto}
-            className="absolute right-2 text-white/70 bg-black/30 rounded-full p-3 z-[10000] active:bg-black/50"
-            style={{ minWidth: '44px', minHeight: '44px' }}
+            onClick={(e) => {
+              e.stopPropagation()
+              nextPhoto()
+            }}
+            className="absolute right-2 md:right-8 text-white/70 hover:text-white bg-black/30 hover:bg-black/50 rounded-full p-2 md:p-3 transition-all duration-300 z-[10000]"
           >
-            <ChevronRight size={28} />
+            <ChevronRight size={32} className="md:w-10 md:h-10" />
           </button>
 
           {/* Gambar Modal */}
           <div 
-            className="relative max-w-[90%] md:max-w-4xl max-h-[85vh] flex items-center justify-center"
+            className="relative max-w-[95%] md:max-w-4xl max-h-[90vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <img 
               src={selectedPhoto.url}
               alt={selectedPhoto.caption}
-              className="max-w-full max-h-[75vh] md:max-h-[85vh] w-auto h-auto object-contain rounded-lg"
-              style={{ touchAction: 'pan-x pan-y' }}
+              className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
+              onError={(e) => {
+                e.target.src = `https://via.placeholder.com/1200x800/faf7f2/4a3728?text=Pre-wedding+${selectedPhoto.id}`
+              }}
             />
             
-            {/* Caption & Counter - Lebih kecil di mobile */}
-            <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
-              <p className="text-white/90 text-center text-xs md:text-sm">
+            {/* Caption & Counter */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
+              <p className="text-white/90 text-center text-sm md:text-base">
                 {selectedPhoto.caption}
               </p>
-              <p className="text-white/60 text-center text-[10px] md:text-xs mt-1">
+              <p className="text-white/60 text-center text-xs mt-1">
                 {currentIndex + 1} / {photos.length}
               </p>
             </div>
           </div>
 
-          {/* Indikator dots - lebih kecil di mobile */}
-          <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-1.5 z-[10000]">
+          {/* Indikator dots (opsional) */}
+          <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-2 z-[10000]">
             {photos.map((_, idx) => (
               <button
                 key={idx}
@@ -190,12 +212,11 @@ const Gallery = () => {
                   setCurrentIndex(idx)
                   setSelectedPhoto(photos[idx])
                 }}
-                className={`transition-all duration-200 rounded-full ${
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   idx === currentIndex 
-                    ? 'bg-white w-3 h-3' 
-                    : 'bg-white/40 w-1.5 h-1.5'
+                    ? 'bg-white w-4' 
+                    : 'bg-white/40 hover:bg-white/60'
                 }`}
-                style={{ minWidth: idx === currentIndex ? '12px' : '6px' }}
               />
             ))}
           </div>
