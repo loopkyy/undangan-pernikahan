@@ -1,23 +1,31 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { weddingData } from '../data/weddingData'
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { weddingData } from '../data/weddingData';
 
 const Cover = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [guestName, setGuestName] = useState('');
+
+  // Ambil nama tamu dari URL, contoh: ?to=Ahmad
+  useEffect(() => {
+    const name = searchParams.get('to');
+    if (name) {
+      setGuestName(decodeURIComponent(name));
+    }
+  }, [searchParams]);
 
   const handleOpenInvitation = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    console.log("Tombol diklik!") // Debug: cek di console browser
-    navigate('/quotes')
-  }
+    e.preventDefault();
+    e.stopPropagation();
+    navigate('/quotes');
+  };
 
   return (
     <div 
       className="page-container min-h-screen flex items-center justify-center relative cursor-pointer"
-      style={{ touchAction: 'manipulation' }} // Mencegah zoom double-tap
+      style={{ touchAction: 'manipulation' }}
     >
-      
       {/* Decorative Elements */}
       <div className="absolute top-20 left-10 w-40 h-40 border-l-2 border-t-2 border-[#c9a87c]/20 pointer-events-none"></div>
       <div className="absolute bottom-20 right-10 w-40 h-40 border-r-2 border-b-2 border-[#c9a87c]/20 pointer-events-none"></div>
@@ -35,19 +43,18 @@ const Cover = () => {
               decoding="async"
               className="w-full h-full rounded-full object-cover"
               onError={(e) => {
-                e.target.src = `https://ui-avatars.com/api/?name=${weddingData.couple.pria.nama}+${weddingData.couple.wanita.nama}&background=c9a87c&color=fff&size=200`
+                e.target.src = `https://ui-avatars.com/api/?name=${weddingData.couple.pria.nama}+${weddingData.couple.wanita.nama}&background=c9a87c&color=fff&size=200`;
               }}
             />
           </div>
         </div>
         
-        {/* Nama mempelai*/}
+        {/* Nama mempelai */}
         <div className="mb-6">
           <h1 className="text-2xl md:text-3xl text-[#4a3728] font-light leading-tight tracking-wide">
             {weddingData.couple.pria.nama}
           </h1>
           
-          {/* Dekorasi & */}
           <div className="flex items-center justify-center gap-3 my-3">
             <div className="w-8 h-px bg-[#c9a87c]"></div>
             <span className="text-[#c9a87c] text-xl">&</span>
@@ -60,17 +67,21 @@ const Cover = () => {
         </div>
         
         <div className="w-20 h-px bg-[#c9a87c] mx-auto my-6"></div>
-        <p className="text-[#6b5a4a] mb-8">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-        <p className="text-[#8b7a6a] text-lg mb-12">Keluarga Besar & Sahabat</p>
         
-        {/* TOMBOL - DIPERBESAR AREA KLIKNYA */}
+        {/* SAPAAN DINAMIS */}
+        <p className="text-[#6b5a4a] mb-2">Kepada Yth.</p>
+        <p className="text-[#c9a87c] text-xl md:text-2xl font-semibold mb-4">
+          {guestName ? guestName : 'Bapak/Ibu/Saudara/i'}
+        </p>
+        <p className="text-[#8b7a6a] text-lg mb-12">di tempat</p>
+        
+        {/* Tombol Buka Undangan */}
         <div className="flex justify-center">
           <button 
             onClick={handleOpenInvitation}
             onTouchStart={(e) => {
-              // Untuk HP, touchStart lebih responsif
-              e.preventDefault()
-              handleOpenInvitation(e)
+              e.preventDefault();
+              handleOpenInvitation(e);
             }}
             className="border-2 border-[#c9a87c] text-[#c9a87c] hover:bg-[#c9a87c] hover:text-white px-10 py-4 tracking-[0.2em] text-sm transition-all duration-500 min-w-[200px] active:scale-95 active:bg-[#c9a87c] active:text-white"
             style={{ 
@@ -84,7 +95,7 @@ const Cover = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Cover
+export default Cover;
